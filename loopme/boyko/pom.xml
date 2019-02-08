@@ -12,6 +12,7 @@
 
     <properties>
         <springwebmvc.version>5.1.4.RELEASE</springwebmvc.version>
+        <lombok.version>1.18.4</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -20,6 +21,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
                 <version>${springwebmvc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
