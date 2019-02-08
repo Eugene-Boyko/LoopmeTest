@@ -32,7 +32,9 @@
     </dependencyManagement>
 
     <modules>
+        <module>domain</module>
         <module>web</module>
         <module>serverstarter</module>
+        <module>persistence</module>
     </modules>
 </project>
