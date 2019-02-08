@@ -1,0 +1,7 @@
+*.lst
+*.jar
+*.class
+*maven-archiver*
+*jar*
+*/target/*
+*.idea*
