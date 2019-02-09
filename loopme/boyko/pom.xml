@@ -11,8 +11,15 @@
     <packaging>pom</packaging>
 
     <properties>
-        <springwebmvc.version>5.1.4.RELEASE</springwebmvc.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <spring-web-mvc.version>5.1.4.RELEASE</spring-web-mvc.version>
         <lombok.version>1.18.4</lombok.version>
+        <spring-jdbc.version>2.0.6</spring-jdbc.version>
+        <spring-orm.version>5.1.4.RELEASE</spring-orm.version>
+        <spring-context.version>5.1.4.RELEASE</spring-context.version>
+        <hibernate-core.version>5.4.1.Final</hibernate-core.version>
+        <h2.version>1.4.197</h2.version>
     </properties>
 
     <dependencyManagement>
@@ -20,8 +27,37 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
-                <version>${springwebmvc.version}</version>
+                <version>${spring-web-mvc.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring-orm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-context.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -34,7 +70,7 @@
     <modules>
         <module>domain</module>
         <module>web</module>
-        <module>serverstarter</module>
         <module>persistence</module>
+        <module>serverstarter</module>
     </modules>
 </project>
