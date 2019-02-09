@@ -1,9 +1,12 @@
 package com.loopme.dao.impl;
 
-import com.loopme.model.User;
+import com.loopme.dbmodel.User;
+import com.loopme.domainrepo.IUserDomainRepo;
+import org.springframework.stereotype.Component;
 
-public class UserDaoImpl extends GenericDaoHibernateImpl<com.loopme.dbmodel.User, User, String, String> {
-    public UserDaoImpl(Class<com.loopme.dbmodel.User> typeClass) {
-        super(typeClass);
+@Component
+public class UserDaoImpl extends GenericDaoHibernateImpl<User, com.loopme.model.User, String, String> implements IUserDomainRepo {
+    public UserDaoImpl() {
+        super(com.loopme.dbmodel.User.class);
     }
 }

@@ -9,9 +9,6 @@ import com.loopme.service.IAdminService;
 
 public class AdminServiceImpl implements IAdminService {
 
-    private static final String INCOMPATIBLE_USER_ROLE_MESSAGE = "Update operation performed on the user with incorrect role. User role: %s, but have to be %s";
-    private static final String UPDATE_NON_EXISTING_USER_MESSAGE = "Update operation performed on non-existing user. User with business key: %s does not exist";
-
     private IUserDomainRepo userDomainRepo;
 
     public AdminServiceImpl(IUserDomainRepo userDomainRepo) {
@@ -57,9 +54,7 @@ public class AdminServiceImpl implements IAdminService {
     private User updateUser(User user, UserRole userRole) {
         validateUser(user, userRole);
         User existingUser = userDomainRepo.getByBusinessKey(user.getBusinessKey());
-        if (existingUser == null) {
-            throw new UpdateNonExistingUserException(String.format(UPDATE_NON_EXISTING_USER_MESSAGE, user.getBusinessKey()));
-        }
+        validateForNull(user, existingUser);
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
         userDomainRepo.saveOrUpdate(existingUser);
@@ -68,7 +63,13 @@ public class AdminServiceImpl implements IAdminService {
 
     private void validateUser(User user, UserRole userRole) {
         if (!user.getRole().equals(userRole)) {
-            throw new IncompatibleUserRoleException(String.format(INCOMPATIBLE_USER_ROLE_MESSAGE, user.getRole().name(), userRole.name()));
+            throw new IncompatibleUserRoleException(user.getRole().name(), userRole.name());
+        }
+    }
+
+    private void validateForNull(User user, User existingUser) {
+        if (existingUser == null) {
+            throw new UpdateNonExistingUserException(user.getBusinessKey());
         }
     }
 }

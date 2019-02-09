@@ -18,7 +18,7 @@ public class Application implements IDaoEntity {
     private static final long serialVersionUID = 822353117270863796L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 

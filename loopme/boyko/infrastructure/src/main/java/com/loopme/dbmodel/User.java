@@ -17,7 +17,7 @@ public class User implements IDaoEntity {
     private static final long serialVersionUID = 6917335361960599156L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @EqualsAndHashCode.Exclude
     private Long id;

@@ -19,6 +19,8 @@
         <spring-orm.version>5.1.4.RELEASE</spring-orm.version>
         <spring-context.version>5.1.4.RELEASE</spring-context.version>
         <hibernate-core.version>5.4.1.Final</hibernate-core.version>
+        <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <mapstruct-processor.version>1.2.0.Final</mapstruct-processor.version>
         <h2.version>1.4.197</h2.version>
     </properties>
 
@@ -63,6 +65,18 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct-processor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

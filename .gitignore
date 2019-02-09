@@ -7,3 +7,4 @@
 *.idea*
 *.iml
 /loopme/boyko/infrastructure/target/classes
+/loopme/boyko/infrastructure/target/generated-sources
