@@ -1,4 +1,5 @@
-package com.loopme.web;
+package com.loopme.controller;
+
 
 import com.loopme.model.User;
 import com.loopme.model.UserRole;
@@ -12,11 +13,7 @@ public class PublisherController {
     @RequestMapping("/getPublisher")
     @ResponseBody
     public User getPublisher() {
-        User user = new User();
-        user.setEmail("someEmail");
-        user.setName("someName");
-        user.setRole(UserRole.PUBLISHER);
-        return user;
+        return new User("someName", "someEmail", UserRole.PUBLISHER);
     }
 
 }

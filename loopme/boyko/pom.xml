@@ -69,8 +69,8 @@
 
     <modules>
         <module>domain</module>
-        <module>web</module>
-        <module>persistence</module>
+        <module>application</module>
+        <module>infrastructure</module>
         <module>serverstarter</module>
     </modules>
 </project>

@@ -1,5 +1,6 @@
 package com.loopme.dbmodel;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
@@ -9,19 +10,24 @@ import java.util.List;
 
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name="application")
-public class Application implements IDaoModel {
+public class Application implements IDaoEntity {
+
+    private static final long serialVersionUID = 822353117270863796L;
 
     @Id
     @GeneratedValue
     @Column(nullable = false)
     private Long id;
 
-    @NaturalId
+    @EqualsAndHashCode.Include
+    @NaturalId(mutable = true)
     @Column(nullable = false)
     private String name;
 
+    @EqualsAndHashCode.Include
     @Enumerated(EnumType.STRING)
     private ApplicationType applicationType;
 
@@ -43,3 +49,4 @@ public class Application implements IDaoModel {
         return id;
     }
 }
+
