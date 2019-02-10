@@ -31,9 +31,4 @@ public class User implements IDaoEntity {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
 }

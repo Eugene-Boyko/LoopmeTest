@@ -17,7 +17,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public abstract class GenericDaoHibernateImpl<TD extends IDaoEntity, TB extends IEntityBO, PK extends Serializable, BK> implements IGenericDao<TB, PK, BK> {
+public abstract class GenericDaoHibernateImpl<TD extends IDaoEntity, TB extends IEntityBO, PK extends Serializable, BK> implements IGenericDao<TD, TB, PK, BK> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -32,32 +32,40 @@ public abstract class GenericDaoHibernateImpl<TD extends IDaoEntity, TB extends 
     }
 
     @Override
-    @Transactional
     public void saveOrUpdate(TB businessObject) {
-        getSession().saveOrUpdate(mapper.toDao(businessObject));
+        saveOrMerge(businessObject);
     }
 
     @Override
-    @Transactional
+    public TD saveOrMerge(TB businessObject) {
+        TD objectToSave = mapper.toDao(businessObject);
+        TD existingObject = getSession().bySimpleNaturalId(typeClass).load(businessObject.getBusinessKey());
+        if (existingObject != null) {
+            objectToSave.setId(existingObject.getId());
+            objectToSave = typeClass.cast(getSession().merge(objectToSave));
+        } else {
+            getSession().saveOrUpdate(objectToSave);
+        }
+        return objectToSave;
+    }
+
+    @Override
     public TB getById(PK id) {
         return mapper.toBO(getSession().get(typeClass, id));
     }
 
     @Override
-    @Transactional
     public void delete(BK businessKey) {
-        TD load = getSession().bySimpleNaturalId(typeClass).load(businessKey);
-        getSession().delete(load);
+        TD toDelete = getSession().bySimpleNaturalId(typeClass).load(businessKey);
+        getSession().delete(toDelete);
     }
 
     @Override
-    @Transactional
     public TB getByBusinessKey(BK businessKey) {
         return mapper.toBO(getSession().bySimpleNaturalId(typeClass).load(businessKey));
     }
 
     @Override
-    @Transactional
     public List<TB> getAll() {
         Session currentSession = getSession();
         CriteriaQuery<TD> criteriaQuery = currentSession.getCriteriaBuilder().createQuery(typeClass);

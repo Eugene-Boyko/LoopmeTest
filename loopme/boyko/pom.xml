@@ -15,9 +15,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <spring-web-mvc.version>5.1.4.RELEASE</spring-web-mvc.version>
         <lombok.version>1.18.4</lombok.version>
-        <spring-jdbc.version>2.0.6</spring-jdbc.version>
+        <spring-jdbc.version>5.1.4.RELEASE</spring-jdbc.version>
         <spring-orm.version>5.1.4.RELEASE</spring-orm.version>
         <spring-context.version>5.1.4.RELEASE</spring-context.version>
+        <spring-boot-test.version>2.1.1.RELEASE</spring-boot-test.version>
         <hibernate-core.version>5.4.1.Final</hibernate-core.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
         <mapstruct-processor.version>1.2.0.Final</mapstruct-processor.version>
@@ -78,13 +79,27 @@
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct-processor.version}</version>
             </dependency>
+
+            <!-- Test Scope -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-test.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>domain</module>
-        <module>application</module>
-        <module>infrastructure</module>
         <module>serverstarter</module>
+        <module>infrastructure</module>
+        <module>application</module>
     </modules>
 </project>

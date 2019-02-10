@@ -1,19 +1,39 @@
 package com.loopme.controller;
 
 
+import com.loopme.model.Application;
+import com.loopme.model.ApplicationType;
+import com.loopme.model.ContentType;
 import com.loopme.model.User;
-import com.loopme.model.UserRole;
+import com.loopme.service.IPublisherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class PublisherController {
 
-    @RequestMapping("/getPublisher")
+    @Autowired
+    private IPublisherService publisherService;
+
+    @RequestMapping("/publisher/createApplication")
     @ResponseBody
-    public User getPublisher() {
-        return new User("someName", "someEmail", UserRole.PUBLISHER);
+    public Application createApplication(String name, ApplicationType applicationType, List<ContentType> contentTypes, User user) {
+        return publisherService.createApplication(name, applicationType, contentTypes, user);
     }
 
+    @RequestMapping("/publisher/updateApplication")
+    @ResponseBody
+    public Application updateApplication(Application application) {
+        return publisherService.updateApplication(application);
+    }
+
+    @RequestMapping("/publisher/deleteApplication")
+    @ResponseBody
+    public void deleteApplication(String businessKey) {
+        publisherService.deleteApplication(businessKey);
+    }
 }

@@ -5,7 +5,7 @@ import com.loopme.domainrepo.IUserDomainRepo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDaoImpl extends GenericDaoHibernateImpl<User, com.loopme.model.User, String, String> implements IUserDomainRepo {
+public class UserDaoImpl extends GenericDaoHibernateImpl<User, com.loopme.model.User, Long, String> implements IUserDomainRepo {
     public UserDaoImpl() {
         super(com.loopme.dbmodel.User.class);
     }

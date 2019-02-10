@@ -31,7 +31,7 @@ public class Application implements IDaoEntity {
     @Enumerated(EnumType.STRING)
     private ApplicationType applicationType;
 
-    @ElementCollection(targetClass = ContentType.class)
+    @ElementCollection(targetClass = ContentType.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "application_ContentTypes",
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "contentTypeId")
@@ -43,10 +43,5 @@ public class Application implements IDaoEntity {
     @OneToOne
     @JoinColumn(name="userId")
     private User user;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
 }
 
