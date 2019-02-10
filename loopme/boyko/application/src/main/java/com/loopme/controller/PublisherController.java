@@ -1,6 +1,5 @@
 package com.loopme.controller;
 
-
 import com.loopme.model.Application;
 import com.loopme.model.ApplicationType;
 import com.loopme.model.ContentType;
@@ -35,5 +34,11 @@ public class PublisherController {
     @ResponseBody
     public void deleteApplication(String businessKey) {
         publisherService.deleteApplication(businessKey);
+    }
+
+    @RequestMapping("/publisher/getMyApplications")
+    @ResponseBody
+    public List<Application> getMyApplications(String publisherName) {
+        return publisherService.getMyApplications(publisherName);
     }
 }

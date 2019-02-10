@@ -42,6 +42,11 @@ public class PublisherServiceImpl implements IPublisherService {
         applicationDomainRepo.delete(businessKey);
     }
 
+    @Override
+    public List<Application> getMyApplications(String publisherName) {
+        return null;
+    }
+
     private void validateApplicationForNull(Application application, Application existingApplication) {
         if (existingApplication == null) {
             throw new UpdateNonExistingApplicationException(application.getBusinessKey());

@@ -53,4 +53,10 @@ public class OperatorController {
     public void deleteApplication(String businessKey) {
         operatorService.deleteApplication(businessKey);
     }
+
+    @RequestMapping("/operator/getAllApplications")
+    @ResponseBody
+    public List<Application> getAllApplications(){
+        return operatorService.getAllApplications();
+    }
 }

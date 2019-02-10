@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -174,6 +175,33 @@ public class ApplicationDaoTest {
         assertThat(allApplications.stream().map(Application::getBusinessKey)).containsExactlyInAnyOrder(firstName, secondName);
     }
 
+    @Test
+    public void getApplicationsByUserNameTest() {
+        //given
+        String firstName = "ApplicationOne";
+        String secondName = "ApplicationTwo";
+        String thirdName = "ApplicationThree";
+        Application applicationOne = getApplicationBO();
+        applicationOne.setName(firstName);
+        Application applicationTwo = getApplicationBO();
+        applicationTwo.setName(secondName);
+        applicationTwo.setApplicationType(ApplicationType.IOS);
+        Application applicationThree = getApplicationBO();
+        applicationThree.setName(thirdName);
+        applicationThree.setUser(new User("OtherUserName", "OtherUserEmail", UserRole.PUBLISHER));
+        applicationDao.saveOrUpdate(applicationOne);
+        applicationDao.saveOrUpdate(applicationTwo);
+        applicationDao.saveOrUpdate(applicationThree);
+
+        //when
+        List<Application> applicationsByUserName = applicationDao.getApplicationsByUserName(applicationOne.getUser().getName());
+
+        //then
+        assertThat(applicationsByUserName).hasSize(2);
+        assertThat(applicationsByUserName.stream().map(Application::getName).collect(Collectors.toList())).containsExactlyInAnyOrder(firstName, secondName);
+        assertThat(applicationsByUserName.stream().map(l -> l.getUser().getName()).distinct().collect(Collectors.toList())).containsOnly(applicationOne.getUser().getName());
+    }
+
     private void assertApplication(Application checkedApplication, Application expectedApplication) {
         assertThat(checkedApplication.getName()).isEqualTo(expectedApplication.getName());
         assertThat(checkedApplication.getBusinessKey()).isEqualTo(expectedApplication.getBusinessKey());
@@ -211,7 +239,7 @@ public class ApplicationDaoTest {
         User user = new User();
         String userName = "testUserName";
         String email = "test@email.com";
-        UserRole userRole = UserRole.ADMIN;
+        UserRole userRole = UserRole.PUBLISHER;
         user.setName(userName);
         user.setEmail(email);
         user.setRole(userRole);

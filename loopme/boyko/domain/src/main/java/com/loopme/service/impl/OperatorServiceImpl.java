@@ -68,6 +68,11 @@ public class OperatorServiceImpl implements IOperatorService {
         applicationDomainRepo.delete(businessKey);
     }
 
+    @Override
+    public List<Application> getAllApplications() {
+        return applicationDomainRepo.getAll();
+    }
+
     private void validateUser(User user) {
         if (!user.getRole().equals(UserRole.PUBLISHER)) {
             throw new IncompatibleUserRoleException(user.getRole().name(), UserRole.PUBLISHER.name());

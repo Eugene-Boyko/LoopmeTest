@@ -19,4 +19,6 @@ public interface IOperatorService {
     Application updateApplication(Application application);
 
     void deleteApplication(String businessKey);
+
+    List<Application> getAllApplications();
 }

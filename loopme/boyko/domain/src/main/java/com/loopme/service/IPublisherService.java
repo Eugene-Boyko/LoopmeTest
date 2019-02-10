@@ -13,4 +13,6 @@ public interface IPublisherService {
     Application updateApplication(Application application);
 
     void deleteApplication(String businessKey);
+
+    List<Application> getMyApplications(String publisherName);
 }

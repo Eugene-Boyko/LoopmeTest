@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name="user")
+@Table(name="User")
 public class User implements IDaoEntity {
 
     private static final long serialVersionUID = 6917335361960599156L;

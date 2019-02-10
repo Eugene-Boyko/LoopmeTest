@@ -23,7 +23,7 @@ public abstract class GenericDaoHibernateImpl<TD extends IDaoEntity, TB extends 
     private EntityManager entityManager;
 
     @Autowired
-    private IMapper<TD, TB> mapper;
+    protected IMapper<TD, TB> mapper;
 
     private Class<TD> typeClass;
 
@@ -73,7 +73,7 @@ public abstract class GenericDaoHibernateImpl<TD extends IDaoEntity, TB extends 
         return mapper.toBOs(currentSession.createQuery(criteriaQuery).getResultList());
     }
 
-    private Session getSession() {
+    Session getSession() {
         return entityManager.unwrap(Session.class);
     }
 }
