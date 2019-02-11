@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -131,6 +132,32 @@ public class UserDaoTest {
         //then
         assertThat(allApplications).hasSize(2);
         assertThat(allApplications.stream().map(User::getBusinessKey)).containsExactlyInAnyOrder(firstName, secondName);
+    }
+
+    @Test
+    public void getUsersByRole() {
+        //given
+        String firstName = "UserOne";
+        String secondName = "UserTwo";
+        String thirdName = "UserThree";
+        User userOne = getUserBO();
+        userOne.setName(firstName);
+        User userTwo = getUserBO();
+        userTwo.setName(secondName);
+        User userThree = getUserBO();
+        userThree.setName(thirdName);
+        userThree.setRole(UserRole.PUBLISHER);
+        userDao.saveOrUpdate(userOne);
+        userDao.saveOrUpdate(userTwo);
+        userDao.saveOrUpdate(userThree);
+
+        //when
+        List<User> usersByRole = userDao.getUsersByRole(UserRole.ADMIN);
+
+        //then
+        assertThat(usersByRole).hasSize(2);
+        assertThat(usersByRole.stream().map(User::getName).collect(Collectors.toList())).containsExactlyInAnyOrder(firstName, secondName);
+        assertThat(usersByRole.stream().map(User::getRole).distinct().collect(Collectors.toList())).containsOnly(userOne.getRole());
     }
 
     private void assertUser(User checkedUser, User expectedUser) {

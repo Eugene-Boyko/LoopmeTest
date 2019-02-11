@@ -15,17 +15,17 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
     @Bean
-    public IAdminService adminService(IUserDomainRepo userDomainRepo){
+    public IAdminService adminService(IUserDomainRepo userDomainRepo) {
         return new AdminServiceImpl(userDomainRepo);
     }
 
     @Bean
-    public IOperatorService operatorService(IUserDomainRepo userDomainRepo, IApplicationDomainRepo applicationDomainRepo){
+    public IOperatorService operatorService(IUserDomainRepo userDomainRepo, IApplicationDomainRepo applicationDomainRepo) {
         return new OperatorServiceImpl(userDomainRepo, applicationDomainRepo);
     }
 
     @Bean
-    public IPublisherService publisherService(IApplicationDomainRepo applicationDomainRepo){
+    public IPublisherService publisherService(IApplicationDomainRepo applicationDomainRepo) {
         return new PublisherServiceImpl(applicationDomainRepo);
     }
 }

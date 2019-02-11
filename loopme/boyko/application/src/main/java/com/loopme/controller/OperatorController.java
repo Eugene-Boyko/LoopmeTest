@@ -56,7 +56,13 @@ public class OperatorController {
 
     @RequestMapping("/operator/getAllApplications")
     @ResponseBody
-    public List<Application> getAllApplications(){
+    public List<Application> getAllApplications() {
         return operatorService.getAllApplications();
+    }
+
+    @RequestMapping("/operator/getAllPublishers")
+    @ResponseBody
+    public List<User> getAllPublishers() {
+        return operatorService.getAllPublishers();
     }
 }

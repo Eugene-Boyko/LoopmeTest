@@ -21,4 +21,6 @@ public interface IOperatorService {
     void deleteApplication(String businessKey);
 
     List<Application> getAllApplications();
+
+    List<User> getAllPublishers();
 }

@@ -73,6 +73,11 @@ public class OperatorServiceImpl implements IOperatorService {
         return applicationDomainRepo.getAll();
     }
 
+    @Override
+    public List<User> getAllPublishers() {
+        return userDomainRepo.getUsersByRole(UserRole.PUBLISHER);
+    }
+
     private void validateUser(User user) {
         if (!user.getRole().equals(UserRole.PUBLISHER)) {
             throw new IncompatibleUserRoleException(user.getRole().name(), UserRole.PUBLISHER.name());

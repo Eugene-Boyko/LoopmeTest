@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class AdminController {
 
@@ -47,5 +49,11 @@ public class AdminController {
     @ResponseBody
     public void deleteOperator(String businessKey) {
         adminService.deleteOperator(businessKey);
+    }
+
+    @RequestMapping("/admin/getAllUsers")
+    @ResponseBody
+    public List<User> getAllUsers() {
+        return adminService.getAllUsers();
     }
 }

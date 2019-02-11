@@ -2,6 +2,8 @@ package com.loopme.service;
 
 import com.loopme.model.User;
 
+import java.util.List;
+
 public interface IAdminService {
     User createPublisher(String name, String email);
 
@@ -14,4 +16,6 @@ public interface IAdminService {
     User updateOperator(User operator);
 
     void deleteOperator(String businessKey);
+
+    List<User> getAllUsers();
 }

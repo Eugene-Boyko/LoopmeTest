@@ -36,9 +36,9 @@ public class PublisherController {
         publisherService.deleteApplication(businessKey);
     }
 
-    @RequestMapping("/publisher/getMyApplications")
+    @RequestMapping("/publisher/getApplicationsByPublisherName")
     @ResponseBody
-    public List<Application> getMyApplications(String publisherName) {
-        return publisherService.getMyApplications(publisherName);
+    public List<Application> getApplicationsByPublisherName(String publisherName) {
+        return publisherService.getApplicationsByPublisherName(publisherName);
     }
 }

@@ -43,8 +43,8 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
-    public List<Application> getMyApplications(String publisherName) {
-        return null;
+    public List<Application> getApplicationsByPublisherName(String publisherName) {
+        return applicationDomainRepo.getApplicationsByUserName(publisherName);
     }
 
     private void validateApplicationForNull(Application application, Application existingApplication) {

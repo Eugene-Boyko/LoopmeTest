@@ -7,6 +7,8 @@ import com.loopme.model.User;
 import com.loopme.model.UserRole;
 import com.loopme.service.IAdminService;
 
+import java.util.List;
+
 public class AdminServiceImpl implements IAdminService {
 
     private IUserDomainRepo userDomainRepo;
@@ -43,6 +45,11 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public void deleteOperator(String businessKey) {
         userDomainRepo.delete(businessKey);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userDomainRepo.getAll();
     }
 
     private User createUser(String name, String email, UserRole userRole) {

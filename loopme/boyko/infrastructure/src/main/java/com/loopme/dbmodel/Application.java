@@ -12,9 +12,9 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="Application")
-@NamedQueries({@NamedQuery(name = Application.APPLICATIONS_BY_USER_NAME_QUERY,
-        query = "select app from Application app join User u on app.userId = u.id where u.name = :name") })
+@Table(name = "Application")
+@NamedQueries({@NamedQuery(name = Application.APPLICATIONS_BY_USER_NAME_QUERY, query =
+        "select app from Application app join User u on app.userId = u.id where u.name = :name")})
 public class Application implements IDaoEntity {
 
     public static final String APPLICATIONS_BY_USER_NAME_QUERY = "APPLICATIONS_BY_USER_NAME_QUERY";
@@ -45,7 +45,7 @@ public class Application implements IDaoEntity {
     private String userId;
 
     @OneToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private User user;
 }
 
