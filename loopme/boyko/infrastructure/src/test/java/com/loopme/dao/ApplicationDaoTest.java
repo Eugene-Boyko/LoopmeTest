@@ -67,8 +67,6 @@ public class ApplicationDaoTest {
         applicationDao.saveOrUpdate(application);
 
         //then
-        List allApplications = entityManager.createQuery("select app from Application app").getResultList();
-        assertThat(allApplications).hasSize(1);
         com.loopme.dbmodel.Application savedApplication = (com.loopme.dbmodel.Application) createQueryForGetApplicationByBusinessKey(application.getBusinessKey()).getSingleResult();
         assertThat(savedApplication.getId()).isNotNull();
         assertApplication(mapper.toBO(savedApplication), application);
@@ -156,6 +154,7 @@ public class ApplicationDaoTest {
     }
 
     @Test
+    //There are several predefined elements preset in the db, see data.sql file
     public void testGetAll() {
         //given
         String firstName = "ApplicationOne";
@@ -166,13 +165,20 @@ public class ApplicationDaoTest {
         applicationTwo.setName(secondName);
         applicationDao.saveOrUpdate(applicationOne);
         applicationDao.saveOrUpdate(applicationTwo);
+        String predefinedApplicationNameOne = "YouTube";
+        String predefinedApplicationNameTwo = "MK Mobile";
+        String predefinedUserNameOne = "PredefinedPublisher";
+        String predefinedUserNameTwo = "PredefinedOperator";
 
         //when
         List<Application> allApplications = applicationDao.getAll();
 
         //then
-        assertThat(allApplications).hasSize(2);
-        assertThat(allApplications.stream().map(Application::getBusinessKey)).containsExactlyInAnyOrder(firstName, secondName);
+        assertThat(allApplications).hasSize(4);
+        assertThat(allApplications.stream().map(Application::getName).collect(Collectors.toList()))
+                .containsExactlyInAnyOrder(firstName, secondName, predefinedApplicationNameOne, predefinedApplicationNameTwo);
+        assertThat(allApplications.stream().map(l -> l.getUser().getName()).distinct().collect(Collectors.toList()))
+                .containsExactlyInAnyOrder(applicationOne.getUser().getName(), predefinedUserNameOne, predefinedUserNameTwo);
     }
 
     @Test

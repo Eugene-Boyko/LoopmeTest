@@ -6,16 +6,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
-
     @RequestMapping("/")
     @ResponseBody
     public String hello() {
-        return "Helloooooo!!!!!=)))";
-    }
-
-    @RequestMapping("/nya")
-    @ResponseBody
-    public String sayNya() {
-        return "Nya!!!!!=)))";
+        return "Hello. Server is running (LoopMe Boyko Test)";
     }
 }

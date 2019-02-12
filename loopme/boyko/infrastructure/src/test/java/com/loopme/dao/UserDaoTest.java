@@ -62,8 +62,6 @@ public class UserDaoTest {
         userDao.saveOrUpdate(user);
 
         //then
-        List allUsers = entityManager.createQuery("select u from User u").getResultList();
-        assertThat(allUsers).hasSize(1);
         com.loopme.dbmodel.User savedUser = (com.loopme.dbmodel.User) createQueryForGetUserByBusinessKey(user.getBusinessKey()).getSingleResult();
         assertThat(savedUser.getId()).isNotNull();
         assertUser(mapper.toBO(savedUser), user);
@@ -115,6 +113,7 @@ public class UserDaoTest {
     }
 
     @Test
+    //There are several predefined elements preset in the db, see data.sql file
     public void testGetAll() {
         //given
         String firstName = "UserOne";
@@ -125,16 +124,21 @@ public class UserDaoTest {
         userTwo.setName(secondName);
         userDao.saveOrUpdate(userOne);
         userDao.saveOrUpdate(userTwo);
+        String predefinedUserNameOne = "PredefinedPublisher";
+        String predefinedUserNameTwo = "PredefinedOperator";
+        String predefinedUserNameThree = "PredefinedAdmin";
 
         //when
         List<User> allApplications = userDao.getAll();
 
         //then
-        assertThat(allApplications).hasSize(2);
-        assertThat(allApplications.stream().map(User::getBusinessKey)).containsExactlyInAnyOrder(firstName, secondName);
+        assertThat(allApplications).hasSize(5);
+        assertThat(allApplications.stream().map(User::getBusinessKey))
+                .containsExactlyInAnyOrder(firstName, secondName, predefinedUserNameOne, predefinedUserNameTwo, predefinedUserNameThree);
     }
 
     @Test
+    //There are several predefined elements preset in the db, see data.sql file
     public void getUsersByRole() {
         //given
         String firstName = "UserOne";
@@ -150,13 +154,14 @@ public class UserDaoTest {
         userDao.saveOrUpdate(userOne);
         userDao.saveOrUpdate(userTwo);
         userDao.saveOrUpdate(userThree);
+        String predefinedUserName = "PredefinedAdmin";
 
         //when
         List<User> usersByRole = userDao.getUsersByRole(UserRole.ADMIN);
 
         //then
-        assertThat(usersByRole).hasSize(2);
-        assertThat(usersByRole.stream().map(User::getName).collect(Collectors.toList())).containsExactlyInAnyOrder(firstName, secondName);
+        assertThat(usersByRole).hasSize(3);
+        assertThat(usersByRole.stream().map(User::getName).collect(Collectors.toList())).containsExactlyInAnyOrder(firstName, secondName, predefinedUserName);
         assertThat(usersByRole.stream().map(User::getRole).distinct().collect(Collectors.toList())).containsOnly(userOne.getRole());
     }
 

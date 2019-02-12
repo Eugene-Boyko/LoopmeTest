@@ -4,10 +4,12 @@ import com.loopme.domainrepo.IApplicationDomainRepo;
 import com.loopme.domainrepo.IUserDomainRepo;
 import com.loopme.service.IAdminService;
 import com.loopme.service.IOperatorService;
+import com.loopme.service.IUserPermissionService;
 import com.loopme.service.IPublisherService;
 import com.loopme.service.impl.AdminServiceImpl;
 import com.loopme.service.impl.OperatorServiceImpl;
 import com.loopme.service.impl.PublisherServiceImpl;
+import com.loopme.service.impl.UserPermissionServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,5 +29,10 @@ public class ServiceConfig {
     @Bean
     public IPublisherService publisherService(IApplicationDomainRepo applicationDomainRepo) {
         return new PublisherServiceImpl(applicationDomainRepo);
+    }
+
+    @Bean
+    public IUserPermissionService userPermissionService() {
+        return new UserPermissionServiceImpl();
     }
 }
