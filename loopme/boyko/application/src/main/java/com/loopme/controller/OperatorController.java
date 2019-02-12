@@ -7,60 +7,62 @@ import com.loopme.model.User;
 import com.loopme.service.IOperatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/operator")
 public class OperatorController {
 
     @Autowired
     private IOperatorService operatorService;
 
-    @RequestMapping("/operator/createPublisher")
+    @RequestMapping("/createPublisher")
     @ResponseBody
-    public User createPublisher(String name, String email) {
+    public User createPublisher(@RequestParam String name, @RequestParam String email) {
         return operatorService.createPublisher(name, email);
     }
 
-    @RequestMapping("/operator/updatePublisher")
+    @PostMapping("/updatePublisher")
     @ResponseBody
-    public User updatePublisher(User publisher) {
+    public User updatePublisher(@RequestBody User publisher) {
         return operatorService.updatePublisher(publisher);
     }
 
-    @RequestMapping("/operator/deletePublisher")
-    @ResponseBody
-    public void deletePublisher(String businessKey) {
+    @DeleteMapping("/deletePublisher")
+    public void deletePublisher(@RequestParam String businessKey) {
         operatorService.deletePublisher(businessKey);
     }
 
-    @RequestMapping("/operator/createApplication")
+    @RequestMapping("/createApplication")
     @ResponseBody
-    public Application createApplication(String name, ApplicationType applicationType, List<ContentType> contentTypes, User user) {
+    public Application createApplication(@RequestParam String name,
+                                         @RequestParam ApplicationType applicationType,
+                                         @RequestParam List<ContentType> contentTypes,
+                                         @RequestParam User user) {
         return operatorService.createApplication(name, applicationType, contentTypes, user);
     }
 
-    @RequestMapping("/operator/updateApplication")
+    @PostMapping("/updateApplication")
     @ResponseBody
-    public Application updateApplication(Application application) {
+    public Application updateApplication(@RequestBody Application application) {
         return operatorService.updateApplication(application);
     }
 
-    @RequestMapping("/operator/deleteApplication")
-    @ResponseBody
-    public void deleteApplication(String businessKey) {
+    @DeleteMapping("/deleteApplication")
+    public void deleteApplication(@RequestParam String businessKey) {
         operatorService.deleteApplication(businessKey);
     }
 
-    @RequestMapping("/operator/getAllApplications")
+    @GetMapping("/getAllApplications")
     @ResponseBody
     public List<Application> getAllApplications() {
         return operatorService.getAllApplications();
     }
 
-    @RequestMapping("/operator/getAllPublishers")
+    @GetMapping("/getAllPublishers")
     @ResponseBody
     public List<User> getAllPublishers() {
         return operatorService.getAllPublishers();

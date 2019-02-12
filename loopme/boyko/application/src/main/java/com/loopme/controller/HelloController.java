@@ -1,12 +1,15 @@
 package com.loopme.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 public class HelloController {
-    @RequestMapping("/")
+
+    @GetMapping("/")
     @ResponseBody
     public String hello() {
         return "Hello. Server is running (LoopMe Boyko Test)";

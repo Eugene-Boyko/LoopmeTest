@@ -4,54 +4,53 @@ import com.loopme.model.User;
 import com.loopme.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private IAdminService adminService;
 
-    @RequestMapping("/admin/createPublisher")
+    @RequestMapping("/createPublisher")
     @ResponseBody
-    public User createPublisher(String name, String email) {
+    public User createPublisher(@RequestParam String name, @RequestParam String email) {
         return adminService.createPublisher(name, email);
     }
 
-    @RequestMapping("/admin/updatePublisher")
+    @PostMapping("/updatePublisher")
     @ResponseBody
-    public User updatePublisher(User publisher) {
+    public User updatePublisher(@RequestBody User publisher) {
         return adminService.updatePublisher(publisher);
     }
 
-    @RequestMapping("/admin/deletePublisher")
-    @ResponseBody
-    public void deletePublisher(String businessKey) {
+    @DeleteMapping("/deletePublisher")
+    public void deletePublisher(@RequestParam String businessKey) {
         adminService.deletePublisher(businessKey);
     }
 
-    @RequestMapping("/admin/createOperator")
+    @RequestMapping("/createOperator")
     @ResponseBody
-    public User createOperator(String name, String email) {
+    public User createOperator(@RequestParam String name, @RequestParam String email) {
         return adminService.createOperator(name, email);
     }
 
-    @RequestMapping("/admin/updateOperator")
+    @PostMapping("/updateOperator")
     @ResponseBody
-    public User updateOperator(User operator) {
+    public User updateOperator(@RequestBody User operator) {
         return adminService.updateOperator(operator);
     }
 
-    @RequestMapping("/admin/deleteOperator")
-    @ResponseBody
-    public void deleteOperator(String businessKey) {
+    @DeleteMapping("/deleteOperator")
+    public void deleteOperator(@RequestParam String businessKey) {
         adminService.deleteOperator(businessKey);
     }
 
-    @RequestMapping("/admin/getAllUsers")
+    @GetMapping("/getAllUsers")
     @ResponseBody
     public List<User> getAllUsers() {
         return adminService.getAllUsers();
