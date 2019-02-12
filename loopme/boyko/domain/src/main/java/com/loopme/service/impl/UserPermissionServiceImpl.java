@@ -10,7 +10,7 @@ public class UserPermissionServiceImpl implements IUserPermissionService {
 
     @Override
     public List<UserPermission> getPublisherPermissions() {
-        return Arrays.asList(UserPermission.CREATE_APPLICATION, UserPermission.UPDATE_APPLICATION, UserPermission.DELETE_APPLIATION);
+        return Arrays.asList(UserPermission.CREATE_APPLICATION, UserPermission.UPDATE_APPLICATION, UserPermission.DELETE_APPLICATION);
     }
 
     @Override
@@ -24,6 +24,6 @@ public class UserPermissionServiceImpl implements IUserPermissionService {
     public List<UserPermission> getOperatorPermissions() {
         return Arrays.asList(
                 UserPermission.CREATE_PUBLISHER, UserPermission.UPDATE_PUBLISHER, UserPermission.DELETE_PUBLISHER,
-                UserPermission.CREATE_APPLICATION, UserPermission.UPDATE_APPLICATION, UserPermission.DELETE_APPLIATION);
+                UserPermission.CREATE_APPLICATION, UserPermission.UPDATE_APPLICATION, UserPermission.DELETE_APPLICATION);
     }
 }
