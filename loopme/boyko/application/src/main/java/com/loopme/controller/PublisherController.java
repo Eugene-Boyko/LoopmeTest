@@ -19,7 +19,7 @@ public class PublisherController {
     @Autowired
     private IPublisherService publisherService;
 
-    @GetMapping("/createApplication")
+    @RequestMapping("/createApplication")
     @ResponseBody
     public Application createApplication(@RequestParam String name,
                                          @RequestParam ApplicationType applicationType,
@@ -41,7 +41,7 @@ public class PublisherController {
 
     @GetMapping("/getApplicationsByPublisherName")
     @ResponseBody
-    public List<Application> getApplicationsByPublisherName(String publisherName) {
+    public List<Application> getApplicationsByPublisherName(@RequestParam String publisherName) {
         return publisherService.getApplicationsByPublisherName(publisherName);
     }
 }

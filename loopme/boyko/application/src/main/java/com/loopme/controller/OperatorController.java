@@ -1,8 +1,6 @@
 package com.loopme.controller;
 
 import com.loopme.model.Application;
-import com.loopme.model.ApplicationType;
-import com.loopme.model.ContentType;
 import com.loopme.model.User;
 import com.loopme.service.IOperatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +34,10 @@ public class OperatorController {
         operatorService.deletePublisher(businessKey);
     }
 
-    @RequestMapping("/createApplication")
+    @PostMapping("/createApplication")
     @ResponseBody
-    public Application createApplication(@RequestParam String name,
-                                         @RequestParam ApplicationType applicationType,
-                                         @RequestParam List<ContentType> contentTypes,
-                                         @RequestParam User user) {
-        return operatorService.createApplication(name, applicationType, contentTypes, user);
+    public Application createApplication(@RequestBody Application application) {
+        return operatorService.createApplication(application.getName(), application.getApplicationType(), application.getContentTypes(), application.getUser());
     }
 
     @PostMapping("/updateApplication")

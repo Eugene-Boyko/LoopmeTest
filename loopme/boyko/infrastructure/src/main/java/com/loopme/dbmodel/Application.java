@@ -13,11 +13,11 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "Application")
-@NamedQueries({@NamedQuery(name = Application.APPLICATIONS_BY_USER_NAME_QUERY, query =
-        "select app from Application app join User u on app.userId = u.id where u.name = :name")})
+@NamedQueries({@NamedQuery(name = Application.APPLICATIONS_BY_PUBLISHER_USER_NAME_QUERY, query =
+        "select app from Application app join User u on app.userId = u.id where u.name = :name and u.role = 'PUBLISHER'")})
 public class Application implements IDaoEntity {
 
-    public static final String APPLICATIONS_BY_USER_NAME_QUERY = "APPLICATIONS_BY_USER_NAME_QUERY";
+    public static final String APPLICATIONS_BY_PUBLISHER_USER_NAME_QUERY = "APPLICATIONS_BY_PUBLISHER_USER_NAME_QUERY";
 
     private static final long serialVersionUID = 822353117270863796L;
 

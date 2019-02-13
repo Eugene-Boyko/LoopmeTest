@@ -35,7 +35,7 @@ public class ApplicationDaoImpl extends GenericDaoHibernateImpl<com.loopme.dbmod
     @Override
     public List<Application> getApplicationsByUserName(String userName) {
         Query<com.loopme.dbmodel.Application> getApplicationByUserNameQuery = getSession().createNamedQuery(
-                com.loopme.dbmodel.Application.APPLICATIONS_BY_USER_NAME_QUERY, com.loopme.dbmodel.Application.class);
+                com.loopme.dbmodel.Application.APPLICATIONS_BY_PUBLISHER_USER_NAME_QUERY, com.loopme.dbmodel.Application.class);
         getApplicationByUserNameQuery.setParameter("name", userName);
         return mapper.toBOs(getApplicationByUserNameQuery.getResultList());
     }
