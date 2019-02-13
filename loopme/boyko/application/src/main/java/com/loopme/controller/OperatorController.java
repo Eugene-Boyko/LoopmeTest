@@ -37,7 +37,7 @@ public class OperatorController {
     @PostMapping("/createApplication")
     @ResponseBody
     public Application createApplication(@RequestBody Application application) {
-        return operatorService.createApplication(application.getName(), application.getApplicationType(), application.getContentTypes(), application.getUser());
+        return operatorService.createApplication(application);
     }
 
     @PostMapping("/updateApplication")

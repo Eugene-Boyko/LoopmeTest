@@ -8,7 +8,7 @@ import com.loopme.model.User;
 import java.util.List;
 
 public interface IPublisherService {
-    Application createApplication(String name, ApplicationType applicationType, List<ContentType> contentTypes, User user);
+    Application createApplication(Application application);
 
     Application updateApplication(Application application);
 

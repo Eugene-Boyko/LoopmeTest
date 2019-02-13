@@ -14,7 +14,7 @@ public interface IOperatorService {
 
     void deletePublisher(String businessKey);
 
-    Application createApplication(String name, ApplicationType applicationType, List<ContentType> contentTypes, User user);
+    Application createApplication(Application application);
 
     Application updateApplication(Application application);
 

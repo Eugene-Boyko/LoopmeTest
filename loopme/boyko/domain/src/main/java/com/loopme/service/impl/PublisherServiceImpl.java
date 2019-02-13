@@ -19,8 +19,7 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
-    public Application createApplication(String name, ApplicationType applicationType, List<ContentType> contentTypes, User user) {
-        Application application = new Application(name, applicationType, contentTypes, user);
+    public Application createApplication(Application application) {
         applicationDomainRepo.saveOrUpdate(application);
         return application;
     }
